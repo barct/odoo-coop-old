@@ -6,25 +6,16 @@
 from openerp import models, fields, api
 from dbfread import DBF
 import hashlib
-#from openerp.tools.config import config
-#from datetime import date
-#from openerp.osv import fields as old_fields
-
-#class suscriptor(models.Model):
-#	hashcode = fields.Char(length=15)
+import utils
 
 
-class TableSync():
+class table_sync():
 	"""
 	Class TableSync
 		is a base class for mirroring dbf of Infcooop system... and other stuff 
 	"""
 	hashcode = fields.Char(length=15)
 	dbf_table = None
-
-	def __init__(self, *args, **kwargs):
-		super(TableSync, self).__init__(*args,**kwargs)
-		
 
 	def generateHash(self, rowdata):
 		"""
@@ -54,27 +45,26 @@ class TableSync():
 		for row in self.dbf_table:
 				yield row
 	
-	def sync(self, env):
+	def sync(self):
 		"""
 		here's the magic
 		Gets all rows in the dbf file and verifies that they are loaded in the model
 		"""
-		model = str(self)
-		path = self.pool.get("infocoop_configuration").get_dbf_path()
+		model = self._name
+		path = self.env["infocoop_configuration"].get_dbf_path()
 		dbf_tablename = path + "/" + self.dbf_tablename + '.dbf'
 		self.dbf_table = DBF(dbf_tablename)
 		for row in self.dbf_rows():
 			pklist = []
 			for pk in self.dbf_pk:
-				pklist.append(pk,"=",row[pk.upper()])
-
-			ids = env[model].search(pklist)
+				pklist.append((pk,"=",utils.strip_or_none(row[pk.upper()])))
+			ids = self.env[model].search(pklist, limit=1)
 			if ids:
-				is_changed = not (ids[0].checkHash(unicode(row)))
+				is_changed = not (ids.checkHash(unicode(row)))
 				if is_changed:
-					ids[0].write_row(row, self.dbf_table)
+					ids.write_row(row, self.dbf_table)
 			else:
-				new = env[model].create({})
+				new = self.env[model].create({})
 				new.write_row(row, self.dbf_table)
 
 
@@ -84,13 +74,13 @@ class TableSync():
 		'''
 		write_dict={}
 		for f in dbf_table.fields:
-			write_dict[f.name.lower()]=dbf_row[f.name.upper()]
+			write_dict[f.name.lower()]=utils.strip_or_none(dbf_row[f.name.upper()])
 		self.write(write_dict)
 		self.generateHash(unicode(dbf_row))
 			
 
 
-class infocoop_ingresos(models.Model, TableSync):
+class infocoop_ingresos(models.Model, table_sync):
 	'''
 	This model is a mirror of a table ingresos in InfoCoop system
 	ingresos represent the members in a cooperative
@@ -133,8 +123,38 @@ class infocoop_ingresos(models.Model, TableSync):
 	codpostal = fields.Char(string='codpostal',length=15)
 	sexo = fields.Char(string='sexo',length=1)
 
+	_sql_constraints = [('unique_keys', 'unique(socio,medidor,orden)', 'must be unique!'),]
+
 
 	def dbf_rows(self):
 		for row in super(infocoop_ingresos, self).dbf_rows():
 			if row["FEC_BAJA"] is None:
 				yield row
+
+
+class infocoop_tablas(models.Model, table_sync):
+
+	dbf_tablename = "tablas"
+	dbf_pk = ("tema","subtema","codigo","subcodigo")
+
+	tema = fields.Char(string='tema',length=1)
+	subtema = fields.Char(string='subtema',length=1)
+	codigo = fields.Char(string='codigo',length=4)
+	subcodigo = fields.Char(string='subcodigo',length=6)
+	concepto = fields.Char(string='concepto',length=50)
+	cantidad = fields.Char(string='cantidad',length=4)
+	valor = fields.Float(string='valor')
+	venc_1 = fields.Date(string='venc_1')
+	recar_1 = fields.Float(string='recar_1')
+	venc_2 = fields.Date(string='venc_2')
+	recar_2 = fields.Float(string='recar_2')
+	venc_3 = fields.Date(string='venc_3')
+	recar_3 = fields.Float(string='recar_3')
+	actualizar = fields.Float(string='actualizar')
+	editable = fields.Boolean(string='editable')
+	imputacion = fields.Char(string='imputacion',length=25)
+	observacio = fields.Text(string='observacio')
+	paragrupos = fields.Char(string='paragrupos',length=1)
+	grafico = fields.Binary(string='grafico')
+
+	_sql_constraints = [('unique_keys', 'unique(tema,subtema,codigo,subcodigo)', 'must be unique!'),]

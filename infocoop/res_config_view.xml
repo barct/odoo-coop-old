@@ -22,8 +22,14 @@
                         <field name="otra_opcion" class="oe_inline" />
                         <label for="otra_opcion" />
                     </div>
+                     <div>
+                        <button name="sync_tablas" string="Sync Tablas table for Infocoop" type="object" class="oe_link"/>
+                    </div>
                     <div>
-                        <button name="sync_tables" string="Sync Tables for Infocoop" type="object" class="oe_link"/>
+                        <button name="sync_ingresos" string="Sync Ingresos table for Infocoop" type="object" class="oe_link"/>
+                    </div>
+                    <div>
+                        <button name="sync_members" string="Sync Members for Infocoop" type="object" class="oe_link"/>
                     </div>
                     
                 </form>
