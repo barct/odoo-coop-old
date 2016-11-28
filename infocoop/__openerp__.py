@@ -38,9 +38,12 @@ Which is a development in visual fox pro with dbf database
     ],
     'depends': [
         'base',
- #       'dbfread',
- #       'hashlib',
+        'coop_members',
+        'l10n_ar_invoice',
     ],
+    'external_dependencies': {
+        'python': ['dbfread', 'hashlib'],
+    },
     'data': [
  #       'member_view.xml',
         'res_config_view.xml',

@@ -9,10 +9,10 @@ from openerp.osv import fields as old_fields
 from minutes import minutes
 
 
-class Member(models.Model):
+class coop_member(models.Model):
     _inherit = "res.partner"
 
-    membership_number = fields.Integer(string='Membership N', default=None)
+    membership_number = fields.Integer(string='Membership N°', default=None)
     admission_minutes_id = fields.Many2one('minutes','Admission Minutes')
     affiliation_date = fields.Date(string="Affiliation Date")
     disaffiliation_date = fields.Date(string="Disffiliation Date")

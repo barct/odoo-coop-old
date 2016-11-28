@@ -3,7 +3,7 @@
     <data>
         <!-- INHERITED FORM -->
         <record id="view_member_form" model="ir.ui.view">
-            <field name="name">member.form</field>
+            <field name="name">coop_member.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">        
