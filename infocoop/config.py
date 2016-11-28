@@ -4,7 +4,6 @@ from openerp.exceptions import Warning
 import logging
 _logger = logging.getLogger(__name__)
 from debug import oprint
-from personaldatapharser.personaldatapharser import Parser
 
 
 
