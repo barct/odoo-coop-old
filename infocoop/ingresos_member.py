@@ -71,5 +71,5 @@ class IngresosMember(models.Model):
 			"city": city,
 			"street": row.domicilio,
 			"zip": row.codpostal,
-			"responsability_id": self.env["afip.responsability"].search((["name","=","Consumidor Final"],),limit=1).id,
+			"responsability_id": self.env["afip.responsability"].search((["name","=","Consumidor Final"],["active","=",1]), limit=1).id,
 			}
