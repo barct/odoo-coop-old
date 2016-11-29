@@ -18,4 +18,8 @@ class coop_member(models.Model):
     disaffiliation_date = fields.Date(string="Disffiliation Date")
     disaffiliation_minutes_id = fields.Many2one('minutes',string='Disaffiliation Minutes')
     reasons_for_disaffiliation = fields.Char(string="Reasons for Disaffiliation ")
+
+    issued_shared_capital = fields.Float(string="Issued Shared Capital")
+    subscribed_share_capital = fields.Float(string="Subscribed Shared Capital")
+
     
