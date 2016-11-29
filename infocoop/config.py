@@ -24,7 +24,9 @@ class infocoop_configuration(models.TransientModel):
             'dbf_path': "/tmp",
         }
 
+    @api.multi
     def get_dbf_path(self):
+        return self.env["infocoop_configuration"].search([], limit=1).dbf_path 
         return "/var/lib/odoo/virt-env/server/sources/odoo-coop/infocoop/data/dbfs"
 
     @api.multi
