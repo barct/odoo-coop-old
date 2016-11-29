@@ -71,4 +71,5 @@ class IngresosMember(models.Model):
 			"city": city,
 			"street": row.domicilio,
 			"zip": row.codpostal,
+			"responsability_id": "res_CF",
 			}
