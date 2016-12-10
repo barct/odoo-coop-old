@@ -4,10 +4,7 @@
 # directory
 ##############################################################################
 from openerp import models, fields, api
-from datetime import date
-from openerp.osv import fields as old_fields
-from minutes import minutes
-
+from openerp.osv import osv
 
 class coop_member(models.Model):
     _inherit = "res.partner"
@@ -21,5 +18,21 @@ class coop_member(models.Model):
 
     issued_shared_capital = fields.Float(string="Issued Shared Capital")
     subscribed_share_capital = fields.Float(string="Subscribed Shared Capital")
+    is_membership = fields.Boolean(string="Is Membership", compute='get_is_membership', readonly=True)
+
+    def get_is_membership(self):
+    	if self.membership_number > 0 and not self.disaffiliation_date:
+    		return True
+    	return False 
+
+    @api.multi
+    def get_next_membership_number(self):
+    	self.env.cr.execute("SELECT MAX(membership_number) FROM " + self._table)
+    	max = self.env.cr.fetchone()[0] or 0
+    	raise osv.except_osv("Information", "Next Membership Number: %s" % (max+1))
+    	#self.message_post(subject="Próximo N° Socio: %s" % max+1)
+
+    
+
 
     

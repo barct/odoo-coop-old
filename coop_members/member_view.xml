@@ -18,6 +18,7 @@
                                 <field name="disaffiliation_minutes_id"/>
                                 <field name="reasons_for_disaffiliation"/>  
                             </group>
+                            <button name="get_next_membership_number" string="Get next membership number"  type="object" class="oe_link oe_inline" />
                         </group>
                        </page>                 
                 </page>                      

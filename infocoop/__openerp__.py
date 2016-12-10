@@ -40,12 +40,13 @@ Which is a development in visual fox pro with dbf database
         'base',
         'coop_members',
         'l10n_ar_invoice',
+        'electric_utility',
     ],
     'external_dependencies': {
         'python': ['dbfread', 'hashlib'],
     },
     'data': [
- #       'member_view.xml',
+        'data/infocoop_tables.xml',
         'res_config_view.xml',
  #       'security/partner_person_security.xml',
     ],

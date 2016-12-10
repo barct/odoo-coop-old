@@ -4,7 +4,6 @@
 # directory
 ##############################################################################
 
-
-from . import connection
-from . import services
+from . import models
+from . import views
 

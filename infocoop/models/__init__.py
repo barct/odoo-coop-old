@@ -4,8 +4,10 @@
 # directory
 ##############################################################################
 
-
-#from . import member
-from . import models
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
+from . import config
+from . import ingresos_member
+from . import liquidac_invoice
+from . import socios_connection
+from . import socios_contrat
+from . import socios_member
+from . import sync_tables
