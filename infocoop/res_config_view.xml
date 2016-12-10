@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-        <!-- Base Config Settings Form View -->
-        <record id="view_infocoop_configuration" model="ir.ui.view">
-            <field name="name">infocoop.settings</field>
-            <field name="model">infocoop_configuration</field>
-            <field name="arch" type="xml">
-                <form string="Your configuration" class="oe_form_configuration">
-                    <header>
-                        <button string="Save" type="object"
-                            name="execute" class="oe_highlight"/>
-                        or
-                        <button string="Cancel" type="object"
-                            name="cancel" class="oe_link"/>
-                    </header>
-                    <div>
-                        <field name="dbf_path" class="oe_inline" />
-                        <label for="dbf_path" />
-                    </div>
-                    <div>
-                        <field name="otra_opcion" class="oe_inline" />
-                        <label for="otra_opcion" />
-                    </div>
-                     <div>
-                        <button name="sync_tablas" string="Sync Tablas table for Infocoop" type="object" class="oe_link"/>
-                    </div>
-                    <div>
-                        <button name="sync_ingresos" string="Sync Ingresos table for Infocoop" type="object" class="oe_link"/>
-                    </div>
-                    <div>
-                        <button name="sync_members" string="Sync Members for Infocoop" type="object" class="oe_link"/>
-                    </div>
-                    
-                </form>
-            </field>
-        </record>
+<data>
+<!-- Base Config Settings Form View -->
+<record id="view_infocoop_configuration" model="ir.ui.view">
+<field name="name">infocoop.settings</field>
+<field name="model">infocoop_configuration</field>
+<field name="arch" type="xml">
+<form string="Your configuration" class="oe_form_configuration">
+    <header>
+        <button string="Save" type="object"
+        name="execute" class="oe_highlight"/>
+        or
+        <button string="Cancel" type="object"
+        name="cancel" class="oe_link"/>
+    </header>
+    <sheet>
+    
+    <group>
+        <field name="dbf_path"/>
+    </group>
+    <separator string="Infocoop Tables" />
+    
+    <group>
+        <button name="sync_tablas" string="Sync Tablas table for Infocoop" type="object" />
+        <button name="sync_ingresos" string="Sync Ingresos table for Infocoop" type="object" />
+        <button name="sync_socios" string="Sync Socios table for Infocoop" type="object" />
+        <button name="sync_red_usu" string="Sync Red_usu table for Infocoop" type="object"/>
+        <button name="sync_modi_soc" string="Sync Modi_soc table for Infocoop" type="object"/>
+        <button name="sync_tab_fact" string="Sync Tab_Fact table for Infocoop" type="object" />
+        <button name="sync_liquidac" string="Sync Liquidac table for Infocoop" type="object" />
+        <button name="sync_auxiliar" string="Sync Auxiliar table for Infocoop" type="object" />
+        <button name="sync_ctacte" string="Sync Ctacte table for Infocoop" type="object" />
+    </group>
+    
+    <separator string="Odoo Models" />
+    <group>
+        <button name="sync_members" string="Sync Members from Infocoop" type="object"/>
+        
+        <button name="sync_contrats" string="Sync Contrats from Infocoop" type="object" />
+        
+        <button name="sync_settlements" string="Sync Settlements from Infocoop" type="object" />
+    </group>
 
 
-        <record id="infocoop_settings_action" model="ir.actions.act_window">
-            <field name="name">InfoCoop Config</field>
-            <field name="res_model">infocoop_configuration</field>
-            <field name="view_id" ref="view_infocoop_configuration"/>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-        </record>
-
-        <menuitem id="infocoop_menu" name="InfoCoop Config"  parent="base.menu_config" action="infocoop_settings_action"/>
-
-
-    </data>
+</sheet>
+</form>
+</field>
+</record>
+<record id="infocoop_settings_action" model="ir.actions.act_window">
+<field name="name">InfoCoop Config</field>
+<field name="res_model">infocoop_configuration</field>
+<field name="view_id" ref="view_infocoop_configuration"/>
+<field name="view_mode">form</field>
+<field name="target">inline</field>
+</record>
+<menuitem id="infocoop_menu" name="InfoCoop Config"  parent="base.menu_config" action="infocoop_settings_action"/>
+</data>
 </openerp>

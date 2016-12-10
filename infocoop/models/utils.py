@@ -4,6 +4,8 @@
 # For copyright and license notices, see __openerp__.py file in module root
 # directory
 ##############################################################################
+import re
+
 def strip_or_none(val):
 	if val is None: return None
 	if isinstance(val, basestring):
@@ -26,6 +28,17 @@ def doc_type_equivalences(doc_type):
 	else:
 		return None
 
+def afip_resposability_equivalences(cod_iva):
+	if cod_iva == 2: #RI
+		return "1" #IVA Responsable Inscripto
+	elif cod_iva == 3:
+		return "4" #IVA Sujeto Exento
+	elif cod_iva == 5:
+		return "6" #Responsable Monotributo
+	else:
+		return "5" #Consumidor Final
+
+
 def doc_number_normalize(doc_type, number):
 	try:
 		number=int(number)
@@ -39,3 +52,10 @@ def doc_number_normalize(doc_type, number):
 		dt = doc_type_equivalences(doc_type)
 		d=number
 	return (dt,d)
+
+def name_clean(name):
+	names = name.split("-")
+	name=names[0]
+	name = re.sub('[*]', '', name)
+	name = re.sub('\s+', ' ', name)
+	return name.title()
