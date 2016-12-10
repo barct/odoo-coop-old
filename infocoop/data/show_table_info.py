@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in module root
 # directory
@@ -8,7 +9,7 @@ from dbfread import DBF
 #from openerp.osv import fields as old_fields
 
 def print_table_structure(table):
-	table = DBF(table + '.dbf')
+	table = DBF(table)
 	r=""
 	for f in table.fields:
 		if f.type=="C":
@@ -30,4 +31,4 @@ def print_table_structure(table):
 			r += "\n%s" % f	
 	print r
 
-print_table_structure("dbfs/tablas")
+print_table_structure(sys.argv[1])

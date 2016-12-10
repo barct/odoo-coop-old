@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data >
+		<record model="infocoop.mirror_tables" id="infocoop.ingresos">
+			<field name="name">infocoop_ingresos</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.socios">
+			<field name="name">infocoop_socios</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.suscript">
+			<field name="name">infocoop_suscript</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.tablas">
+			<field name="name">infocoop_tablas</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.liquidac">
+			<field name="name">infocoop_liquidac</field>
+		</record>
+
+		<record model="infocoop.mirror_tables" id="infocoop.auxiliar">
+			<field name="name">infocoop_auxiliar</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.ctacte">
+			<field name="name">infocoop_ctacte</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.tab_fact">
+			<field name="name">infocoop_tab_fact</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.modi_soc">
+			<field name="name">infocoop_modi_soc</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.red_usu">
+			<field name="name">infocoop_red_usu</field>
+		</record>
+
+	</data>
+</openerp>

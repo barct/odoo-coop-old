@@ -4,7 +4,7 @@
 # directory
 ##############################################################################
 from openerp import models, fields, api
-from debug import oprint
+#from debug import oprint
 
 
 
