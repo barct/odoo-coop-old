@@ -70,6 +70,5 @@
 		<menuitem id="menu_electric_utility_base" name="Electric Utility"/>
 		<menuitem id="menu_electric_utility_connections" parent="menu_electric_utility_base" name="Connections"/>
 		<menuitem id="menu_electric_utility_connections_list" parent="menu_electric_utility_connections" name="Connections List" action="action_connection"/>
-		<menuitem id="menu_electric_utility_contrat_list" parent="menu_electric_utility_connections" name="Contrat List" action="action_contrats"/>
 	</data>
 </openerp>
