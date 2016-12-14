@@ -8,16 +8,14 @@ from dbfread import DBF
 import hashlib
 import utils
 from sys import stdout
-from debug import oprint
-
 import logging
 _logger = logging.getLogger(__name__)
 
 DEBUG = True
 
-class table_sync():
+class mirror_table():
 	"""
-	Class TableSync
+	Class mirror table
 		is a base class for mirroring dbf of Infcooop system... and other stuff 
 	"""
 	hashcode = fields.Char(length=15)
@@ -118,22 +116,7 @@ class table_sync():
 		return
 			
 
-class infocoop_tables(models.Model):
-	_name = 'infocoop.mirror_tables'
-
-	name = fields.Char("Name")
-
-	last_sync = fields.Date("Last Sync")
-
-	records = fields.Integer("Records", compute='get_records', readonly=True)
-
-	def get_records(self):
-		return self.env[self.name].search_count([])
-
-
-
-
-class infocoop_ingresos(models.Model, table_sync):
+class infocoop_ingresos(models.Model, mirror_table):
 	'''
 	This model is a mirror of a table ingresos in InfoCoop system
 	ingresos represent the members in a cooperative
@@ -185,7 +168,7 @@ class infocoop_ingresos(models.Model, table_sync):
 				yield row
 
 
-class infocoop_tablas(models.Model, table_sync):
+class infocoop_tablas(models.Model, mirror_table):
 
 	dbf_tablename = "tablas"
 	dbf_pk = ("tema","subtema","codigo","subcodigo")
@@ -213,7 +196,7 @@ class infocoop_tablas(models.Model, table_sync):
 	_sql_constraints = [('unique_keys', 'unique(tema,subtema,codigo,subcodigo)', 'must be unique!'),]
 
 
-class infocoop_liquidac(models.Model, table_sync):
+class infocoop_liquidac(models.Model, mirror_table):
 
 	dbf_tablename = "liquidac"
 	dbf_pk = ("medidor","orden","periodo")
@@ -248,7 +231,7 @@ class infocoop_liquidac(models.Model, table_sync):
 			if row["PERIODO"] in ["09/2016","11/2016"] and row["SERVICIOS"]=="/E":
 				yield row
 
-class infocoop_auxiliar(models.Model, table_sync):
+class infocoop_auxiliar(models.Model, mirror_table):
 
 	dbf_tablename = "auxiliar"
 	dbf_pk = ("medidor","orden","periodo","item")
@@ -273,7 +256,7 @@ class infocoop_auxiliar(models.Model, table_sync):
 			if row["PERIODO"] in ["09/2016","11/2016"]:
 				yield row
 
-class infocoop_ctacte(models.Model, table_sync):
+class infocoop_ctacte(models.Model, mirror_table):
 
 	dbf_tablename = "ctacte"
 	dbf_pk = ("medidor","orden","periodo")
@@ -297,7 +280,7 @@ class infocoop_ctacte(models.Model, table_sync):
 				yield row
 
 
-class infocoop_tab_fact(models.Model, table_sync):
+class infocoop_tab_fact(models.Model, mirror_table):
 
 	dbf_tablename = "tab_fact"
 	dbf_pk = ("periodo",)
@@ -320,14 +303,14 @@ class infocoop_tab_fact(models.Model, table_sync):
 			if row["PERIODO"] in ["09/2016","10/2016", "11/2016","12/2016"]:
 				yield row
 
-class infocoop_socios(models.Model, table_sync):
+class infocoop_socios(models.Model, mirror_table):
 	dbf_tablename = "socios"
 	dbf_pk = ("medido","orden")
 
 	_sql_constraints = [('unique_keys', 'unique(medido, orden)', 'must be unique!'),]
 
 	sector = fields.Integer(string='sector')
-	nrosoc = fields.Integer(string='nrosoc')
+	nrosoc = fields.Integer(string='nrosoc', index=True)
 	codint = fields.Char(string='codint',length=2)
 	secuencia = fields.Char(string='secuencia',length=10)
 	cod2 = fields.Char(string='cod2',length=2)
@@ -374,7 +357,7 @@ class infocoop_socios(models.Model, table_sync):
 			if row["ORDEN"] in ["E","F","G","H","I","J","K","L","M"]:
 				yield row
 
-class infocoop_modi_soc(models.Model, table_sync):
+class infocoop_modi_soc(models.Model, mirror_table):
 	dbf_tablename = "modi_soc"
 	dbf_pk = ("medidor","orden","campo","fecha","hora")
 
@@ -397,7 +380,7 @@ class infocoop_modi_soc(models.Model, table_sync):
 				yield row
 
 
-class infocoop_red_usu(models.Model, table_sync):
+class infocoop_red_usu(models.Model, mirror_table):
 	dbf_tablename = "red_usu"
 	dbf_pk = ("medidor","orden")
 
@@ -426,9 +409,9 @@ class infocoop_red_usu(models.Model, table_sync):
 				yield row
 
 
-class infocoop_suscript(models.Model, table_sync):
-	dbf_tablename = "suscript"
-	dbf_pk = ("nrosoc")
+class infocoop_suscrip(models.Model, mirror_table):
+	dbf_tablename = "suscrip"
+	dbf_pk = ("nrosoc",)
 
 	_sql_constraints = [('unique_keys', 'unique(nrosoc)', 'must be unique!'),]
 

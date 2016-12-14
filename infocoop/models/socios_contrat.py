@@ -46,8 +46,20 @@ class SociosConnection(models.Model, Suscriber):
 							date_start = date(1111,11,11)
 						
 
+		
+		#calculate service status
+		if row.activo=="S" and (row.corte=="N" or not row.corte):
+			service_status = 1
+		elif row.activo=="S" and row.corte=="S":
+			service_status = 3
+		else:
+			service_status = 4
+
+
 		modi_soc = self.env["infocoop_modi_soc"].search([("medidor","=",row.medido),("orden","=",row.orden),("campo","=","ACTIVO")],order="fecha desc, hora desc",limit=1)
-		if modi_soc.actual=="N":
+		if modi_soc.actual=="N" and service_status not in (1,2):
+			date_end=modi_soc.fecha
+		elif service_status > 2 and modi_soc.fecha:
 			date_end=modi_soc.fecha
 		else:
 			date_end = None
@@ -72,20 +84,15 @@ class SociosConnection(models.Model, Suscriber):
 		else:
 			sequence = None
 
-		#calculate service status
-		if row.activo=="S" and (row.corte=="N" or not row.corte):
-			service_status = 1
-		elif row.activo=="S" and row.corte=="S":
-			service_status = 3
-		else:
-			service_status = 4
-
+		
 
 		#obtein billing group
 		if row.codint:
-			billing_group_id = self.env["electric_utility.billing_group"].search([("code","=",int(row.codint)),],limit=1).id
+			billing_group_id = self.env["electric_utility.billing_group"].search([("code","=",row.codint),],limit=1).id
+			if not billing_group_id:
+				billing_group_id=self.env["electric_utility.billing_group"].create({"code":row.codint, "name":row.codint}).id
 		else:
-			billing_group_id = self.env["electric_utility.billing_group"].create({"code":int(row.codint), "name":row.codint}).id
+			billing_group_id = None
 
 		#get or create city
 		city = self.env["infocoop_tablas"].search((["tema","=","T"],["subtema","=","L"],["codigo","=",row.codloca]), limit=1)

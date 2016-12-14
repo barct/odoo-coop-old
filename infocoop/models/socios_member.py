@@ -35,7 +35,7 @@ class SociosMember(models.Model, Suscriber):
 
 	
 		minutes_id = None
-		ingreso = self.env["infocoop_ingresos"].search([("socio","=",row.socio),],limit=1)
+		ingreso = self.env["infocoop_ingresos"].search([("socio","=",row.nrosoc),],limit=1)
 		if ingreso:
 			minutes_id = self.env["minutes"].search((["number","=",ingreso.acta],), limit=1).id
 			if not minutes_id:
@@ -52,7 +52,7 @@ class SociosMember(models.Model, Suscriber):
 					doc_type=None
 
 			data["affiliation_date"]=ingreso.fec_ingr
-			data["membership_number"]=ingreso.socio
+			data["membership_number"]=row.nrosoc
 			data["admission_minutes_id"]=minutes_id
 			data["disaffiliation_date"] = ingreso.fec_baja
 
@@ -76,7 +76,7 @@ class SociosMember(models.Model, Suscriber):
 		return data
 
 	def get_slave_form_row(self, row):
-		socio = self.env["infocoop_ingresos"].search([("medidor","=",row.medido),("orden","=",row.orden)], limit=1).socio
+		socio = self.env["infocoop_ingresos"].search([("socio","=",row.nrosoc),], limit=1).socio
 		if socio>0:
 			return self.env[self.slave_id._name].search([("membership_number","=",socio),], limit=1)
 		else:
