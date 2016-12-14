@@ -18,6 +18,8 @@ class coop_member(models.Model):
 
     issued_shared_capital = fields.Float(string="Issued Shared Capital")
     subscribed_share_capital = fields.Float(string="Subscribed Shared Capital")
+    subscribed_share_capital_cert_number = fields.Integer("Suscribed Share Capital Cert N°")
+    subscribed_share_capital_date = fields.Integer("Suscribed Share Capital Date")
     is_membership = fields.Boolean(string="Is Membership", compute='get_is_membership', readonly=True)
 
     def get_is_membership(self):
