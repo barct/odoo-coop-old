@@ -21,7 +21,7 @@ class SociosMember(models.Model, Suscriber):
 	def prepare_row_fields(self, row):
 		if not row:
 			raise Exception("%s: row %s no válida" % (self._name,row))
-			
+
 		data={}
 		doc_number = None
 		doc_type=None
@@ -71,7 +71,10 @@ class SociosMember(models.Model, Suscriber):
 			data["subscribed_share_capital_cert_number"] = susc.nro_cert
 			data["subscribed_share_capital_date"] = susc.fecha
 
-		data["name"] = name_clean(row.nombre)
+		if row.nombre:
+			data["name"] = name_clean(row.nombre)
+		else:
+			data["name"] = "(desconocido)"
 		data["document_number"]=doc_number
 		data["document_type_id"]=doc_type
 		data["phone"]=row.telefono
