@@ -7,8 +7,13 @@
 	    <field name="model">electric_utility.contrat</field>
 	    <field name="arch" type="xml">
 	        <search string="Contrats">
-	            <field name="client_id"/>
-	            <field name="service_status"/>
+	            <field name="client_id" filter_domain="[('client_id.name','ilike',self)]"/>
+	            <field name="contrat_number" filter_domain="[('contrat_number','=',self)]"/>
+	            <field name="connection_id" filter_domain="[('connection_id.number','=',self)]"/>
+	        	<filter string="Normal" name="filter_service_status_normal" domain="[('service_status','=',1)]" />
+	        	<filter string="Suspended" name="filter_service_status_cutlist" domain="[('service_status','=',2)]" />
+	        	<filter string="In Cutlist" name="filter_service_status_suspended" domain="[('service_status','=',3)]" />
+	        	<filter string="Inactive" name="filter_service_status_inactive" domain="[('service_status','=',4)]" />
 	        </search>
 	    </field>
 	</record>
@@ -28,8 +33,6 @@
 		</group>
 		<group>
 			<field name="connection_id" />
-			<field name="sector" />
-			
 		</group>
 		<group>
 			<field name="service_category_id"/>
@@ -68,10 +71,12 @@
 	<field name="name">contrat.tree.view</field>
 	<field name="model">electric_utility.contrat</field>
 	<field name= "arch" type = "xml">
-	<tree string="Contrats Information"  default_order="client_id" colors="green:service_status == 1;yellow:service_status == 2;red:service_status == 3;grey:service_status == 4" >
+	<tree string="Contrats Information"  default_order="date_start desc" colors="green:service_status == 1;yellow:service_status == 2;red:service_status == 3;grey:service_status == 4" >
 
 		<field name="contrat_number"/>
 		<field name="connection_id"/>
+		<field name="date_start"/>
+		<field name="date_end"/>
 		<field name="client_id"/>
 		<field name="service_status"/>
 	</tree>
@@ -84,6 +89,7 @@
 	<field name="res_model">electric_utility.contrat</field>
 	<field name="view_type">form</field>
 	<field name="view_mode">tree,form</field>
+	<field name="context">{'search_default_filter_service_status_normal': 1,'search_default_filter_service_status_suspended': 1,'search_default_filter_service_status_cutlist': 1}</field>
 
 </record>
 <menuitem id="menu_electric_utility_contrat_list" parent="menu_electric_utility_connections" name="Contrat List" action="action_contrats"/>

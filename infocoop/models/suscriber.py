@@ -79,6 +79,7 @@ class Suscriber():
 
 
 	def create_from_infocoop(self, row):
+		
 		new = self.env[self.slave_id._name].create((self.prepare_row_fields(row)))
 		return self.create({"slave_id":new.id, "master_id": row.id, "hashcode": row.hashcode})
 		
