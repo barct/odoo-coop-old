@@ -54,6 +54,6 @@
 <field name="view_mode">form</field>
 <field name="target">inline</field>
 </record>
-<menuitem id="infocoop_menu" name="InfoCoop Config"  parent="base.menu_config" action="infocoop_settings_action"/>
+<menuitem id="infocoop_menu" name="InfoCoop Config"  parent="infocoop.menu_config" action="infocoop_settings_action"/>
 </data>
 </openerp>

@@ -11,3 +11,4 @@ from . import socios_connection
 from . import socios_contrat
 from . import socios_member
 from . import sync_tables
+from . import sync_panels

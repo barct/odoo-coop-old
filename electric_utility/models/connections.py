@@ -40,7 +40,7 @@ class Connection(models.Model):
 		super(Connection, self).name_get()
 		data = []
 		for o in self:
-			data.append((o.id,"%s" % (o.number,)))
+			data.append((o.id,"%s %s" % (o.sector_id.code.rjust(2,"0"), str(o.number).rjust(5,"0"),)))
 		return  data
 
 	_sql_constraints = [('connection_unique_keys', 'unique(number)', 'Code must be unique!'),]
@@ -50,7 +50,7 @@ class BillingGroup(models.Model):
 	_name = "electric_utility.billing_group"
 
 	code = fields.Char("Code", length=7)
-	name = fields.Char()
+	name = fields.Char("Name")
 
 	_sql_constraints = [('connection_unique_keys', 'unique(code)', 'Code must be unique!'),]
 
@@ -80,9 +80,6 @@ class Contrat(models.Model):
 
 	comment = fields.Text("Comment")
 
-	#sector_id = fields.Related( 'connection_id', 'sector_id', type="many2one", relation="electric_utility.connection", string="Sector", store=False)
-	sector  = fields.Many2one('electric_utility.sector', string='Sector',store=False, related='connection_id.sector_id', required=True)
-
 	_sql_constraints = [('connection_unique_keys', 'unique(contrat_number)', 'Code must be unique!'),]
 
 	@api.multi
@@ -90,5 +87,5 @@ class Contrat(models.Model):
 		super(Contrat, self).name_get()
 		data = []
 		for o in self:
-			data.append((o.id,"%s - %s" % (o.contrat_number, o.client_id.name)))
+			data.append((o.id,"%s - %s" % (str(o.contrat_number).rjust(5,"0"), o.client_id.name)))
 		return  data
