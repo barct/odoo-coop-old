@@ -62,6 +62,12 @@ class SociosMember(models.Model, Suscriber):
 		if code == "1" or code == "4": #RI or Exento
 			data["is_company"] = True
 
+		susc = self.env["infocoop_suscrip"].search([("nrosoc","=",row.nrosoc),], limit=1)
+		if susc:
+			data["subscribed_share_capital"] = susc.capital
+			data["subscribed_share_capital_cert_number"] = susc.nro_cert
+			data["subscribed_share_capital_date"] = susc.fecha
+
 		data["name"] = name_clean(row.nombre)
 		data["document_number"]=doc_number
 		data["document_type_id"]=doc_type
