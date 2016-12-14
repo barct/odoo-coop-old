@@ -19,6 +19,9 @@ class SociosMember(models.Model, Suscriber):
 	slave_id = fields.Many2one('res.partner')
 
 	def prepare_row_fields(self, row):
+		if not row:
+			raise Exception("%s: row %s no válida" % (self._name,row))
+			
 		data={}
 		doc_number = None
 		doc_type=None
