@@ -29,8 +29,8 @@ class Connection(models.Model):
 	service_address_street = fields.Char("Street")
 	service_address_neighborhood = fields.Char("Neighborhood")
 	service_address_city = fields.Char("City")
-	service_address_lat = fields.Float("Latitude")
-	service_address_lng = fields.Float("Longitude")
+	service_address_lat = fields.Float("Latitude", digits=(3, 8))
+	service_address_lng = fields.Float("Longitude", digits=(3, 8))
 	cadastral_nomenclature = fields.Char("Cadastral Nomenclature")
 
 	contrat_ids = fields.One2many("electric_utility.contrat", "connection_id", string="Contrats")
