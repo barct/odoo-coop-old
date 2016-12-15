@@ -54,6 +54,12 @@ class BillingGroup(models.Model):
 
 	_sql_constraints = [('connection_unique_keys', 'unique(code)', 'Code must be unique!'),]
 
+
+class Invoice(models.Model):
+	_inherit = "account.invoice"
+	contrat_id = fields.Many2one("electric_utility.contrat", string = "Contrat")
+
+
 class Contrat(models.Model):
 
 	_name = "electric_utility.contrat"
@@ -77,6 +83,8 @@ class Contrat(models.Model):
 	billing_address_neighborhood = fields.Char("Neighborhood")
 	billing_address_city = fields.Char("City")
 	billing_address_zip = fields.Char("Zip", length=24)
+
+	account_id = fields.Many2one("account.account", string="Account")
 
 	comment = fields.Text("Comment")
 

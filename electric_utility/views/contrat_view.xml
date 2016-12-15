@@ -11,8 +11,8 @@
 	            <field name="contrat_number" filter_domain="[('contrat_number','=',self)]"/>
 	            <field name="connection_id" filter_domain="[('connection_id.number','=',self)]"/>
 	        	<filter string="Normal" name="filter_service_status_normal" domain="[('service_status','=',1)]" />
-	        	<filter string="Suspended" name="filter_service_status_cutlist" domain="[('service_status','=',2)]" />
-	        	<filter string="In Cutlist" name="filter_service_status_suspended" domain="[('service_status','=',3)]" />
+	        	<filter string="In Cutlist" name="filter_service_status_cutlist" domain="[('service_status','=',2)]" />
+	        	<filter string="Suspended" name="filter_service_status_suspended" domain="[('service_status','=',3)]" />
 	        	<filter string="Inactive" name="filter_service_status_inactive" domain="[('service_status','=',4)]" />
 	        </search>
 	    </field>
