@@ -15,34 +15,10 @@
         name="cancel" class="oe_link"/>
     </header>
     <sheet>
-    
     <group>
         <field name="dbf_path"/>
+        <field name="liquidac_invoice_journal_id"/>
     </group>
-    <separator string="Infocoop Tables" />
-    
-    <group>
-        <button name="sync_tablas" string="Sync Tablas table for Infocoop" type="object" />
-        <button name="sync_ingresos" string="Sync Ingresos table for Infocoop" type="object" />
-        <button name="sync_socios" string="Sync Socios table for Infocoop" type="object" />
-        <button name="sync_red_usu" string="Sync Red_usu table for Infocoop" type="object"/>
-        <button name="sync_modi_soc" string="Sync Modi_soc table for Infocoop" type="object"/>
-        <button name="sync_tab_fact" string="Sync Tab_Fact table for Infocoop" type="object" />
-        <button name="sync_liquidac" string="Sync Liquidac table for Infocoop" type="object" />
-        <button name="sync_auxiliar" string="Sync Auxiliar table for Infocoop" type="object" />
-        <button name="sync_ctacte" string="Sync Ctacte table for Infocoop" type="object" />
-    </group>
-    
-    <separator string="Odoo Models" />
-    <group>
-        <button name="sync_members" string="Sync Members from Infocoop" type="object"/>
-        
-        <button name="sync_contrats" string="Sync Contrats from Infocoop" type="object" />
-        
-        <button name="sync_settlements" string="Sync Settlements from Infocoop" type="object" />
-    </group>
-
-
 </sheet>
 </form>
 </field>
