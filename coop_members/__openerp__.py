@@ -41,7 +41,7 @@ TODO
     'data': [
         'member_view.xml',
  #       'res_config_view.xml',
- #       'security/partner_person_security.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
     ],

@@ -42,6 +42,13 @@
 			<field name="name">infocoop_red_usu</field>
 			<field name="dbf_file">red_usu.dbf</field>
 		</record>
-
+		<record model="infocoop.mirror_tables" id="infocoop.estados">
+			<field name="name">infocoop_estados</field>
+			<field name="dbf_file">estados.dbf</field>
+		</record>
+		<record model="infocoop.mirror_tables" id="infocoop.acciones">
+			<field name="name">infocoop_acciones</field>
+			<field name="dbf_file">acciones.dbf</field>
+		</record>
 	</data>
 </openerp>

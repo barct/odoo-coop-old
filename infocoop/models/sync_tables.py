@@ -431,3 +431,61 @@ class infocoop_suscrip(models.Model, mirror_table):
 	fec_acta = fields.Date(string='fec_acta')
 	observacio = fields.Text(string='observacio')
 	nro_cert = fields.Integer(string='nro_cert')
+
+
+class infocoop_estados(models.Model, mirror_table):
+	dbf_tablename = "estados"
+	dbf_pk = ("medidor","orden", "mes", "anio")
+
+	_sql_constraints = [('unique_keys', 'unique(medidor, orden, mes, anio)', 'must be unique!'),]
+
+	barrio = fields.Integer(string='barrio')
+	medidor = fields.Integer(string='medidor')
+	orden = fields.Char(string='orden',length=1)
+	mes = fields.Integer(string='mes')
+	catagua = fields.Integer(string='catagua')
+	anio = fields.Integer(string='anio')
+	luz_ant = fields.Integer(string='luz_ant')
+	luz_act = fields.Integer(string='luz_act')
+	ag_ant = fields.Integer(string='ag_ant')
+	ag_act = fields.Integer(string='ag_act')
+	deudores = fields.Float(string='deudores')
+	acciones = fields.Float(string='acciones')
+	correo = fields.Float(string='correo')
+	alumbrado = fields.Float(string='alumbrado')
+	varios = fields.Float(string='varios')
+	varios2 = fields.Float(string='varios2')
+	varios3 = fields.Float(string='varios3')
+	varios4 = fields.Float(string='varios4')
+	varios5 = fields.Float(string='varios5')
+	varios6 = fields.Float(string='varios6')
+	tomo = fields.Char(string='tomo',length=3)
+	fecha = fields.Char(string='fecha',length=20)
+
+
+class infocoop_acciones(models.Model, mirror_table):
+
+	dbf_tablename = "acciones"
+	dbf_pk = ("nrosoc","cuota")
+
+	_sql_constraints = [('unique_keys', 'unique(nrosoc, cuota)', 'must be unique!'),]
+	barrio = fields.Integer(string='barrio')
+	medidor = fields.Integer(string='medidor')
+	orden = fields.Char(string='orden',length=1)
+	servicio = fields.Char(string='servicio',length=2)
+	cuota = fields.Integer(string='cuota')
+	importe = fields.Float(string='importe')
+	ajuste = fields.Float(string='ajuste')
+	indice = fields.Float(string='indice')
+	periodo = fields.Char(string='periodo',length=7)
+	fecha = fields.Date(string='fecha')
+	recibo = fields.Char(string='recibo',length=10)
+	sector = fields.Integer(string='sector')
+	nrosoc = fields.Integer(string='nrosoc')
+	fec_suscri = fields.Date(string='fec_suscri')
+
+
+	def dbf_rows(self):
+		for row in super(infocoop_red_usu, self).dbf_rows():
+			if row["NROSOC"]<9000:
+				yield row
