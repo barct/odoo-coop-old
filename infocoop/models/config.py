@@ -30,7 +30,7 @@ class infocoop_configuration(models.TransientModel):
     @api.multi
     def get_liquidac_invoice_journal_id(self):
         if  self._cache_liquidac_invoice_journal_id is None:
-            print "leo"
+            #print "leo"
             self._cache_liquidac_invoice_journal_id = self.env["infocoop_configuration"].search([], limit=1, order="id desc").liquidac_invoice_journal_id
         return self._cache_liquidac_invoice_journal_id
 
