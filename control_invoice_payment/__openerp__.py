@@ -19,16 +19,15 @@
 #
 ##############################################################################
 {
-    'name': 'Infocoop Sync',
+    'name': 'Customer Payment Control Cash',
     'version': '8.0.0.0.1',
     'category': 'Tools',
     'sequence': 1,
     'summary': '',
     'description': """
-Infocoop Sync
-=============
-This module is a try to syncronize data from a system for cooperatives called "InfoCoop".
-Which is a development in visual fox pro with dbf database
+Customer Payment Control Cash
+=============================
+This module implement a control of cash for customers invoice payments.
 
     """,
     'author':  'Fernando Hidalgo',
@@ -38,25 +37,17 @@ Which is a development in visual fox pro with dbf database
     ],
     'depends': [
         'base',
-        'coop_members',
-        'l10n_ar_invoice',
-        'electric_utility',
+        'l10n_ar_account_voucher',
+       
     ],
     'external_dependencies': {
-        'python': ['dbfread', 'hashlib'],
+        
     },
     'data': [
-        'data/infocoop_mirror_tables.xml',
-        'data/infocoop_suscribe_tables.xml',
-        'views/config_menu.xml',
-        'views/mirror_tables.xml',
-        'views/suscribe_tables.xml',
-        'views/res_config_view.xml',
-        'security/ir.model.access.csv',
+        #'views/invoices_list.xml',
     ],
     'demo': [
     ],
     'test': [
     ],
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

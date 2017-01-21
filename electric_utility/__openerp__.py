@@ -54,7 +54,7 @@ through the regulator ERSeP.
         'views/res_partner_view.xml',
         'data/afip_document_class.xml',
  #       'res_config_view.xml',
- #       'security/partner_person_security.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
     ],
