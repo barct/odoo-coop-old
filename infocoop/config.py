@@ -26,8 +26,8 @@ class infocoop_configuration(models.TransientModel):
 
     @api.multi
     def get_dbf_path(self):
-        return self.env["infocoop_configuration"].search([], limit=1).dbf_path 
-        return "/var/lib/odoo/virt-env/server/sources/odoo-coop/infocoop/data/dbfs"
+        return self.env["infocoop_configuration"].search([], limit=1).dbf_path
+     #  return "/var/lib/odoo/virt-env/server/sources/odoo-coop/infocoop/data/dbfs"
 
     @api.multi
     def sync_ingresos(self, *args, **kwargs):
